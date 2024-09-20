@@ -25,7 +25,13 @@
                 <a class="nav-link active" href="<?=ROOT?>">DASHBOARD</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?=ROOT?>/users">USERS</a>
+                <a class="nav-link" href="<?=ROOT?>/classes">SCHOOLS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?=ROOT?>/users">STAFF</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?=ROOT?>/classes">STUDENTS</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?=ROOT?>/classes">CLASSES</a>

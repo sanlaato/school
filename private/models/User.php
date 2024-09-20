@@ -35,9 +35,16 @@ class User extends Model
             $this->errors['lastname'] = "Only letters allowed in first name";
         }
 
+        // check for email
         if(empty($DATA['email']) || !filter_var($DATA['email'], FILTER_VALIDATE_EMAIL))
         {
             $this->errors['email'] = "Email is not valid";
+        }
+
+        // check if email exists
+        if($this->where('email', $DATA['email']))
+        {
+            $this->errors['email'] = "That email is already in use";
         }
 
         $genders = ['male', 'female'];
