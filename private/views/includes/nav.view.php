@@ -1,4 +1,11 @@
 <style>
+    nav ul li a {
+        width: 110px;
+        text-align: center;
+        border-left: solid thin #eee !important;
+        border-right: solid thin #fff !important;
+    }
+
     nav ul li a:hover {
         background-color: grey;
         color: white !important;
@@ -26,17 +33,20 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?=ROOT?>/tests">TESTS</a>
             </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    USERS
+                    <?=Auth::getFirstname()?>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="<?=ROOT?>/profile">Profile</a>
                 <a class="dropdown-item" href="#">Dashboard</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?=ROOT?>/logout">Logout</a>
                 </div>
             </li>
+
         </ul>
     </div>
 </nav>
