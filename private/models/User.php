@@ -47,9 +47,9 @@ class User extends Model
         }
 
         $ranks = ['student', 'reception', 'lecturer', 'admin', 'superadmin'];
-        if(empty($DATA['rank']) || !in_array($DATA['rank'], $ranks))
+        if(empty($DATA['user_rank']) || !in_array($DATA['user_rank'], $ranks))
         {
-            $this->errors['rank'] = "Rank is not valid";
+            $this->errors['user_rank'] = "Rank is not valid";
         }
 
         if(empty($DATA['password']) || $DATA['password'] != $DATA['password2'])

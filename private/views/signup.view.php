@@ -27,7 +27,7 @@
                         <option <?= get_select('gender', 'male'); ?> value="male">Male</option>
                         <option <?= get_select('gender', 'female'); ?> value="female">Female</option>
                     </select>
-                    <select class="my-2 form-control" name="rank">
+                    <select class="my-2 form-control" name="user_rank">
                         <option <?= get_select('rank', ''); ?> value="">--Select a Rank--</option>
                         <option <?= get_select('rank', 'student'); ?> value="student">Student</option>
                         <option <?= get_select('rank', 'reception'); ?> value="reception">Reception</option>
