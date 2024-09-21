@@ -1,13 +1,13 @@
 <?php
 
-function get_var($key)
+function get_var($key, $default = '')
 {
     if(isset($_POST[$key]))
     {
         return $_POST[$key];
     }
 
-    return "";
+    return $default;
 }
 
 function get_select($key, $value)
@@ -41,4 +41,9 @@ function random_string($length)
     }
 
     return $text;
+}
+
+function get_date($date)
+{
+    return date("jS M, Y", strtotime($date));
 }

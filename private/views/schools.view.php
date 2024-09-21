@@ -4,7 +4,7 @@
         <div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px;">
             <?php $this->view('includes/crumbs') ?>
             <div class="card-group justify-content-center">
-            <table class="table">
+            <table class="table table-striped">
                 <tr><th>School</th><th>Created by</th><th>Date</th>
                     <th>
                         <a href="<?=ROOT?>/schools/add">
@@ -17,10 +17,14 @@
         
                 <?php if($rows): ?>
                     <?php foreach ($rows as $row): ?>
-                        <tr><td><?=$row->school?></td><td><?=$row->user_id?></td><td><?=$row->date?></td>
+                        <tr><td><?=$row->school?></td><td><?=$row->user->firstname?> <?=$row->user->lastname?></td><td><?=get_date($row->date)?></td>
                             <td>
-                                <button class="btn btn-sm btn-info text-white"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button>
+                                <a href="<?=ROOT?>/schools/edit/<?=$row->id?>">
+                                    <button class="btn btn-sm btn-info text-white"><i class="fa fa-edit"></i></button>
+                                </a>
+                                <a href="<?=ROOT?>/schools/delete/<?=$row->id?>">
+                                    <button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button>
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach;?>

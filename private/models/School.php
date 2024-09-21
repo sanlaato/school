@@ -14,6 +14,10 @@ class School extends Model
         'make_school_id'
     ];
 
+    protected $afterSelect = [
+        'get_user'
+    ];
+
     public function validate($DATA)
     {
         $this->errors = array();
@@ -40,6 +44,17 @@ class School extends Model
 
     public function make_school_id($data) {
         $data['school_id'] = random_string(60);
+        return $data;
+    }
+
+    public function get_user($data) {
+
+        $user = new User();
+        foreach($data as $key => $row) {
+            $result = $user->where('user_id', $row->user_id);
+            $data[$key]->user = is_array($result) ? $result[0] : $result;
+        }
+
         return $data;
     }
 }

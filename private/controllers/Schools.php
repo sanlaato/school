@@ -40,4 +40,39 @@ class Schools extends Controller
             'errors'=>$errors,
         ]);
     }
+
+    function edit($id = null)
+    {
+        if(!Auth::logged_in())
+        {
+            $this->redirect('login');
+        }
+
+        $school = new School();
+        $errors = array();
+        if(count($_POST) > 0)
+        {
+            
+            if($school->validate($_POST))
+            {
+                $school->update($id, $_POST);
+                $this->redirect('/schools');
+            }
+            else
+            {
+                $errors = $school->errors;
+            }
+        }
+
+        $row = $school->where('id', $id);
+        if($row)
+        {
+            $row = $row[0];
+        }
+        
+        $this->view("schools.edit", [
+            'row'=>$row,
+            'errors'=>$errors,
+        ]);
+    }
 }
