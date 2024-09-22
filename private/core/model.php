@@ -57,8 +57,6 @@ class Model extends Database
         $data['id'] = $id;
         $query = "update $this->table set $str where id = :id";
 
-        echo $query;
-
         return $this->query($query, $data);
     }
 

@@ -22,9 +22,17 @@
                                 <a href="<?=ROOT?>/schools/edit/<?=$row->id?>">
                                     <button class="btn btn-sm btn-info text-white"><i class="fa fa-edit"></i></button>
                                 </a>
+
                                 <a href="<?=ROOT?>/schools/delete/<?=$row->id?>">
                                     <button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button>
                                 </a>
+
+                                <a href="<?=ROOT?>/users/switch_school/<?=$row->id?>">
+                                    <button class="btn btn-sm btn-success">Switch to<i class="fa fa-chevron-right"></i></button>
+                                </a>
+                                <?php if($row->school_id == $_SESSION['USER']->school_id): ?>
+                                    <span class="btn btn-sm btn-info text-white" disabled>Super Admin</span>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach;?>

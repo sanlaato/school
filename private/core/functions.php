@@ -47,3 +47,10 @@ function get_date($date)
 {
     return date("jS M, Y", strtotime($date));
 }
+
+function pre_print_r($var)
+{
+    echo "<pre>";
+    print_r($var);
+    echo "</pre>";
+}

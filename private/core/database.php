@@ -27,11 +27,14 @@ class Database
                 }
 
                 if(is_array($data) && count($data) > 0) {
+                    // where & findAll will return this
                     return $data;
                 }
+
+                // insert, update, & delete will return this
+                return true;
             }
         }
-
         return false;
     }
 }
