@@ -19,20 +19,23 @@ class Database
 
         if($stm) {
             $check = $stm->execute($data);
+            // if query succeed
             if($check) {
+
                 if($data_type == "object") {
                     $data = $stm->fetchAll(PDO::FETCH_OBJ);
                 } else {
                     $data = $stm->fetchAll(PDO::FETCH_ASSOC);
                 }
 
+                /*
                 if(is_array($data) && count($data) > 0) {
-                    // where & findAll will return this
                     return $data;
                 }
-
-                // insert, update, & delete will return this
                 return true;
+                */
+
+                return $data;
             }
         }
         return false;

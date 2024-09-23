@@ -12,9 +12,7 @@
                         </a>
                     </th>
                 </tr>
-        
-
-        
+             
                 <?php if($rows): ?>
                     <?php foreach ($rows as $row): ?>
                         <tr><td><?=$row->school?></td><td><?=$row->user->firstname?> <?=$row->user->lastname?></td><td><?=get_date($row->date)?></td>

@@ -41,9 +41,15 @@ class Model extends Database
 
         $query = "insert into $this->table ($columns) values (:$values)";
 
-        echo $query;
-
-        return $this->query($query, $data);
+        
+        // SUCCESS QUERY return an empty array
+        // FAILED QUERY return boolean false 
+        $check = $this->query($query, $data);
+        if(is_array($check))
+        {
+            return true;
+        }
+        return false;
     }
 
     public function update($id, $data)
@@ -57,14 +63,29 @@ class Model extends Database
         $data['id'] = $id;
         $query = "update $this->table set $str where id = :id";
 
-        return $this->query($query, $data);
+        // SUCCESS QUERY return an empty array
+        // FAILED QUERY return boolean false 
+        $check = $this->query($query, $data);
+        if(is_array($check))
+        {
+            return true;
+        }
+        return false;
     }
 
     public function delete($id)
     {
         $query = "delete from $this->table where id = :id";
         $data['id'] = $id;
-        return $this->query($query, $data);
+
+        // SUCCESS QUERY return an empty array
+        // FAILED QUERY return boolean false 
+        $check = $this->query($query, $data);
+        if(is_array($check))
+        {
+            return true;
+        }
+        return false;
     }
 
 
@@ -76,7 +97,7 @@ class Model extends Database
             'value'=>$value
         ]);
 
-        if(is_array($data))
+        if(is_array($data) && count($data) > 0)
         {
             if(property_exists($this, 'afterSelect'))
             {
@@ -85,9 +106,9 @@ class Model extends Database
                     $data = $this->$func($data);
                 }
             }
+            return $data;
         }
-
-        return $data;
+        return false;
     }
 
     public function findAll()
@@ -95,7 +116,7 @@ class Model extends Database
         $query = "select * from $this->table";
         $data = $this->query($query);
 
-        if(is_array($data))
+        if(is_array($data) && count($data) > 0)
         {
             if(property_exists($this, 'afterSelect'))
             {
@@ -104,8 +125,8 @@ class Model extends Database
                     $data = $this->$func($data);
                 }
             }
+            return $data;
         }
-
-        return $data;
+        return false;
     }
 }

@@ -42,7 +42,7 @@ class User extends Model
         }
 
         // check if email exists
-        if($this->where('email', $DATA['email']))
+        if(is_array($this->where('email', $DATA['email'])))
         {
             $this->errors['email'] = "That email is already in use";
         }
@@ -53,7 +53,7 @@ class User extends Model
             $this->errors['email'] = "Gender is not valid";
         }
 
-        $ranks = ['student', 'reception', 'lecturer', 'admin', 'superadmin'];
+        $ranks = ['student', 'reception', 'lecturer', 'admin', 'super_admin'];
         if(empty($DATA['user_rank']) || !in_array($DATA['user_rank'], $ranks))
         {
             $this->errors['user_rank'] = "Rank is not valid";
