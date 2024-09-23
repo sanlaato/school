@@ -12,10 +12,18 @@
                         </a>
                     </th>
                 </tr>
-             
+        
+
+        
                 <?php if($rows): ?>
                     <?php foreach ($rows as $row): ?>
-                        <tr><td><?=$row->school?></td><td><?=$row->user->firstname?> <?=$row->user->lastname?></td><td><?=get_date($row->date)?></td>
+                        <?php 
+                            $creator = "Not specified";
+                            if(isset($row->user)) {
+                                $creator = $row->user->firstname . " " . $row->user->lastname;
+                            }
+                        ?>
+                        <tr><td><?=$row->school?></td><td><?=$creator?></td><td><?=get_date($row->date)?></td>
                             <td>
                                 <a href="<?=ROOT?>/schools/edit/<?=$row->id?>">
                                     <button class="btn btn-sm btn-info text-white"><i class="fa fa-edit"></i></button>

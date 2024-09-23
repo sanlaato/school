@@ -9,8 +9,32 @@ class Users extends Controller
             $this->redirect('login');
         }
         $user = new User();
-        $data = $user->findAll();
+        $data = $user->findAll(['get_school']);
+       
         $this->view("users", ['rows'=>$data]);
+    }
+
+    function add()
+    {
+        $errors = array();
+        if(count($_POST) > 0)
+        {
+            $user = new User();
+            if($user->validate($_POST))
+            {
+                $_POST['date'] = date("Y-m-d H:i:s");
+
+                $user->insert($_POST);
+                $this->redirect('users');
+            }
+            else
+            {
+                $errors = $user->errors;
+            }
+        }
+        $this->view("users.add", [
+            'errors'=>$errors,
+        ]);
     }
 
     function switch_school($school_id)

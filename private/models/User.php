@@ -14,11 +14,14 @@ class User extends Model
         'date',
     ];
 
-
     protected $beforeInsert = [
         'make_user_id', 
         'make_school_id',
-        'hash_password'
+        'hash_password',
+    ];
+
+    protected $afterSelect = [
+        'get_school'
     ];
 
     public function validate($DATA)
@@ -86,6 +89,15 @@ class User extends Model
 
     public function hash_password($data) {
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        return $data;
+    }
+
+    public function get_school($data) {
+        $school = new School();
+        foreach($data as $key => $row) {
+            $result = $school->where('school_id', $row->school_id);
+            $data[$key]->school = is_array($result) ? $result[0] : false;
+        }
         return $data;
     }
 }

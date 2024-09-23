@@ -9,7 +9,7 @@ class Schools extends Controller
             $this->redirect('login');
         }
         $school = new School();
-        $data = $school->findAll();
+        $data = $school->findAll(['get_user']);
 
         $crumbs[] = ['Dashboard', ''];
         $crumbs[] = ['Schools', 'schools'];

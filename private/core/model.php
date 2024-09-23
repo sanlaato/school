@@ -89,7 +89,7 @@ class Model extends Database
     }
 
 
-    public function where($column, $value)
+    public function where($column, $value, $afterSelect = array())
     {
         $column = addslashes($column);
         $query = "select * from $this->table where $column = :value";
@@ -99,6 +99,7 @@ class Model extends Database
 
         if(is_array($data) && count($data) > 0)
         {
+            /*
             if(property_exists($this, 'afterSelect'))
             {
                 foreach($this->afterSelect as $func)
@@ -106,18 +107,29 @@ class Model extends Database
                     $data = $this->$func($data);
                 }
             }
+            */
+
+            if(count($afterSelect) > 0)
+            {
+                foreach($afterSelect as $func)
+                {
+                    $data = $this->$func($data);
+                }
+            }
+
             return $data;
         }
         return false;
     }
 
-    public function findAll()
+    public function findAll($afterSelect = array())
     {
         $query = "select * from $this->table";
         $data = $this->query($query);
 
         if(is_array($data) && count($data) > 0)
         {
+            /*
             if(property_exists($this, 'afterSelect'))
             {
                 foreach($this->afterSelect as $func)
@@ -125,6 +137,16 @@ class Model extends Database
                     $data = $this->$func($data);
                 }
             }
+            */
+
+            if(count($afterSelect) > 0)
+            {
+                foreach($afterSelect as $func)
+                {
+                    $data = $this->$func($data);
+                }
+            }
+
             return $data;
         }
         return false;
