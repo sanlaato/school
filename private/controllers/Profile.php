@@ -2,8 +2,13 @@
 
 class Profile extends Controller
 {
-    function index()
+    function index($user_id)
     {
-        $this->view("profile");
+        $user = new User();
+        $row = $user->first('user_id', $user_id);
+
+        $this->view("profile", [
+            'row'=>$row,
+        ]);
     }
 }

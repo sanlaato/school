@@ -77,11 +77,7 @@ class Schools extends Controller
             }
         }
 
-        $row = $school->where('id', $id);
-        if($row)
-        {
-            $row = $row[0];
-        }
+        $row = $school->first('id', $id);
 
         $crumbs[] = ['Dashboard', ''];
         $crumbs[] = ['Schools', 'schools'];
@@ -109,11 +105,7 @@ class Schools extends Controller
             $this->redirect('/schools');
         }
 
-        $row = $school->where('id', $id);
-        if($row)
-        {
-            $row = $row[0];
-        }
+        $row = $school->first('id', $id);
         
         $crumbs[] = ['Dashboard', ''];
         $crumbs[] = ['Schools', 'schools'];

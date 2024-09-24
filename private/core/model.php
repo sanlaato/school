@@ -88,6 +88,17 @@ class Model extends Database
         return false;
     }
 
+    public function first($column, $value, $afterSelect = array())
+    {
+        $data = $this->where($column, $value, $afterSelect);
+
+        if($data)
+        {
+            return $data[0];
+        }
+
+        return false;
+    }
 
     public function where($column, $value, $afterSelect = array())
     {
