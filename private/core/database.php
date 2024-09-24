@@ -12,7 +12,7 @@ class Database
         return $con;
     }
 
-    public function query($query, $data = array(), $data_type = "object") 
+    public function query($query, $data = array(), $afterSelect = array(), $data_type = "object") 
     {
         $con = $this->connect();
         $stm = $con->prepare($query);
@@ -26,6 +26,14 @@ class Database
                     $data = $stm->fetchAll(PDO::FETCH_OBJ);
                 } else {
                     $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+                }
+
+                if(count($afterSelect) > 0)
+                {
+                    foreach($afterSelect as $func)
+                    {
+                        $data = $this->$func($data);
+                    }
                 }
 
                 /*

@@ -9,7 +9,9 @@ class Users extends Controller
             $this->redirect('login');
         }
         $user = new User();
-        $data = $user->findAll(['get_school']);
+        $school_id = Auth::getSchool_id();
+        $data = $user->query("select * from users where school_id = :school_id && user_rank != 'super_admin'", ['school_id'=>$school_id], ['get_school']);
+        //$data = $user->findAll(['get_school']);
        
         $this->view("users", ['rows'=>$data]);
     }

@@ -28,7 +28,7 @@
                 </div>
                 <?php endforeach;?>
             <?php else: ?>
-                <h4>No users were found at this time</h4>    
+                <h4>No staff member were found at this time</h4>    
             <?php endif;?>
         <div>
     </div>

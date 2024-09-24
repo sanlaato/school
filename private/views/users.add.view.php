@@ -28,12 +28,12 @@
                         <option <?= get_select('gender', 'female'); ?> value="female">Female</option>
                     </select>
                     <select class="my-2 form-control" name="user_rank">
-                        <option <?= get_select('rank', ''); ?> value="">--Select a Rank--</option>
-                        <option <?= get_select('rank', 'student'); ?> value="student">Student</option>
-                        <option <?= get_select('rank', 'reception'); ?> value="reception">Reception</option>
-                        <option <?= get_select('rank', 'lecturer'); ?> value="lecturer">Lecturer</option>
-                        <option <?= get_select('rank', 'admin'); ?> value="admin">Admin</option>
-                        <option <?= get_select('rank', 'super_admin'); ?> value="super_admin">Super Admin</option>
+                        <option <?= get_select('user_rank', ''); ?> value="">--Select a Rank--</option>
+                        <option <?= get_select('user_rank', 'student'); ?> value="student">Student</option>
+                        <option <?= get_select('user_rank', 'reception'); ?> value="reception">Reception</option>
+                        <option <?= get_select('user_rank', 'lecturer'); ?> value="lecturer">Lecturer</option>
+                        <option <?= get_select('user_rank', 'admin'); ?> value="admin">Admin</option>
+                        <option <?= get_select('user_rank', 'super_admin'); ?> value="super_admin">Super Admin</option>
                     </select>
                     <input class="my-2 form-control" value="<?=get_var('password')?>" type="text" name="password" placeholder="Password">
                     <input class="my-2 form-control" value="<?=get_var('password2')?>" type="text" name="password2" placeholder="Retype Password">
