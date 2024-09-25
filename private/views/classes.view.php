@@ -10,7 +10,7 @@
 
                     </th>
                     <th>
-                        School
+                        Class
                     </th>
                     <th>
                         Created by
@@ -19,7 +19,7 @@
                         Date
                     </th>
                     <th>
-                        <a href="<?=ROOT?>/schools/add">
+                        <a href="<?=ROOT?>/classes/add">
                             <button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add New</button>
                         </a>
                     </th>
@@ -37,12 +37,12 @@
                         ?>
                         <tr>
                             <td>
-                                <a href="<?=ROOT?>/schools/<?=$row->id?>">
+                                <a href="<?=ROOT?>/classes/<?=$row->class_id?>">
                                     <button class="btn btn-sm btn-primary"><i class="fa fa-chevron-right"></i></button>
                                 </a>
                             </td>
                             <td>
-                                <?=$row->school?>
+                                <?=$row->class?>
                             </td>
                             <td>
                                 <?=$creator?>
@@ -51,25 +51,18 @@
                                 <?=get_date($row->date)?>
                             </td>
                             <td>
-                                <a href="<?=ROOT?>/schools/edit/<?=$row->id?>">
+                                <a href="<?=ROOT?>/classes/edit/<?=$row->id?>">
                                     <button class="btn btn-sm btn-info text-white"><i class="fa fa-edit"></i></button>
                                 </a>
 
-                                <a href="<?=ROOT?>/schools/delete/<?=$row->id?>">
+                                <a href="<?=ROOT?>/classes/delete/<?=$row->id?>">
                                     <button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button>
                                 </a>
-
-                                <a href="<?=ROOT?>/users/switch_school/<?=$row->id?>">
-                                    <button class="btn btn-sm btn-success">Switch to<i class="fa fa-chevron-right"></i></button>
-                                </a>
-                                <?php if($row->school_id == $_SESSION['USER']->school_id): ?>
-                                    <span class="btn btn-sm btn-info text-white" disabled>Super Admin</span>
-                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach;?>
                 <?php else:?>
-                    <h4>No schools were found at this time</h4>    
+                    <h4>No classes were found at this time</h4>    
                 <?php endif;?>
             </table>
         <div>
