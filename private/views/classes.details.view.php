@@ -28,16 +28,31 @@
                         <a class="nav-link <?=$tab=='tests'? 'active' : ''?>" href="<?=ROOT?>/classes/<?=$row->class_id?>?tab=tests">Tests</a>
                     </li>
                 </ul>
-                <nav class="navbar navbar-light bg-light">
-                    <form class="form-inline">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i>&nbsp</span>
-                            </div>  
-                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" />
-                        </div>
-                    </form>
-                </nav>
+
+                <?php
+                    switch($tab)
+                    {
+                        case 'lecturers':
+                            include ($this->get_include_path('classes.details.tab.lecturers'));
+                            break;
+                        case 'lecturers-add':
+                            include ($this->get_include_path('classes.details.tab.lecturers.add'));
+                            break;
+                        case 'students':
+                            include ($this->get_include_path('classes.details.tab.students'));
+                            break;
+                        case 'students-add':
+                            include ($this->get_include_path('classes.details.tab.students.add'));
+                            break;
+                        case 'tests':
+                            include ($this->get_include_path('classes.details.tab.tests'));
+                            break;
+                        case 'tests-add':
+                            include ($this->get_include_path('classes.details.tab.tests.add'));
+                            break;
+                    }
+                ?>
+
             </div>
 
         </div>

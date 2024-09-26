@@ -2,6 +2,18 @@
 
 class Controller
 {
+    public function get_include_path($include)
+    {
+        if(file_exists("../private/views/" . $include . ".include.php"))
+        {
+            return "../private/views/" . $include . ".include.php";
+        } 
+        else 
+        {
+            return "../private/views/404.view.php";
+        }
+    }
+
     public function view($view, $data = array())
     {
         extract($data);
