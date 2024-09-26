@@ -36,7 +36,7 @@
                         ?>
                         <p class="card-text"><?=$school?></p>
                         
-                        <p class="card-text"><?=str_replace("_", " ", $row->user_rank)?></p>
+                        <p class="card-text"><?=str_replace("_", " ", ucwords($row->user_rank))?></p>
                         <a href="<?=ROOT?>/profile/<?=$row->user_id?>" class="btn btn-primary">Profile</a>
                     </div>
                 </div>

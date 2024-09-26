@@ -46,7 +46,7 @@
                     <?=Auth::getFirstname()?>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="<?=ROOT?>/profile">Profile</a>
+                <a class="dropdown-item" href="<?=ROOT?>/profile/<?=Auth::getUser_id()?>">Profile</a>
                 <a class="dropdown-item" href="#">Dashboard</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?=ROOT?>/logout">Logout</a>

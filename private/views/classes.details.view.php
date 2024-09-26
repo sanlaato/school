@@ -1,7 +1,7 @@
 <?php $this->view('includes/header') ?>
 <?php $this->view('includes/nav') ?>
 
-       <div class="container-fluid p-4 shadow mx-auto" style="max-width:1000px;">
+        <div class="container-fluid p-4 shadow mx-auto" style="max-width:1000px;">
             <?php $this->view('includes/crumbs') ?>
 
             <div class="row">
@@ -19,13 +19,13 @@
             <div class="container-fluid">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Basic Info</a>
+                        <a class="nav-link <?=$tab=='lecturers'? 'active' : ''?>" href="<?=ROOT?>/classes/<?=$row->class_id?>?tab=lecturers">Lecturers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Classes</a>
+                        <a class="nav-link <?=$tab=='students'? 'active' : ''?>" href="<?=ROOT?>/classes/<?=$row->class_id?>?tab=students">Students</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tests</a>
+                        <a class="nav-link <?=$tab=='tests'? 'active' : ''?>" href="<?=ROOT?>/classes/<?=$row->class_id?>?tab=tests">Tests</a>
                     </li>
                 </ul>
                 <nav class="navbar navbar-light bg-light">

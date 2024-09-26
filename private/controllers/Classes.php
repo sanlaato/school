@@ -19,9 +19,16 @@ class Classes extends Controller
                 $crumbs[] = ['Classes', 'classes'];
                 $crumbs[] = [$first->class, ''];
         
+                $tab = 'lecturers'; 
+                if(isset($_GET['tab']))
+                {
+                    $tab = $_GET['tab'];
+                }
+
                 $this->view("classes.details", [
                     'row'=>$first,
                     'crumbs'=>$crumbs,
+                    'tab'=>$tab,
                 ]);
             }
             else
