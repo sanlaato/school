@@ -12,24 +12,12 @@ class Classes extends Controller
         $class = new ClassModel();
         if($id != null)
         {
+            // show class details
+            
             $first = $class->first('class_id', $id, ['get_user']);
             if($first)
             {
-                $crumbs[] = ['Dashboard', ''];
-                $crumbs[] = ['Classes', 'classes'];
-                $crumbs[] = [$first->class, ''];
-        
-                $tab = 'lecturers'; 
-                if(isset($_GET['tab']))
-                {
-                    $tab = $_GET['tab'];
-                }
-
-                $this->view("classes.details", [
-                    'row'=>$first,
-                    'crumbs'=>$crumbs,
-                    'tab'=>$tab,
-                ]);
+                $this->class_details($first);
             }
             else
             {
@@ -38,6 +26,7 @@ class Classes extends Controller
         }
         else
         {
+            // show all classes
             $data = $class->where('school_id', Auth::getSchool_id(),['get_user']);
 
             $crumbs[] = ['Dashboard', ''];
@@ -144,6 +133,39 @@ class Classes extends Controller
         $this->view("classes.delete", [
             'row'=>$row,
             'crumbs'=>$crumbs,
+        ]);
+    }
+
+    private function class_details($data)
+    {
+        $crumbs[] = ['Dashboard', ''];
+        $crumbs[] = ['Classes', 'classes'];
+        $crumbs[] = [$data->class, ''];
+
+        // determine which tab was clicked
+        $tab = 'lecturers'; 
+        if(isset($_GET['tab']))
+        {
+            $tab = $_GET['tab'];
+        }
+
+        // if search button was clicked
+        $results = false;
+        if(isset($_POST['search']) && $_POST['name'] != '')
+        {
+            $user = new User();
+            $name = '%' . $_POST['name'] . '%';
+            $results = $user->query("SELECT * FROM users WHERE (CONCAT(firstname, ' ', lastname) LIKE :name) && user_rank = 'lecturer' && school_id = :school_id", [
+                'name'=>$name,
+                'school_id'=>$data->school_id,
+            ]);
+        }
+
+        $this->view("classes.details", [
+            'row'=>$data,
+            'crumbs'=>$crumbs,
+            'tab'=>$tab,
+            'results'=>$results
         ]);
     }
 }
