@@ -1,4 +1,4 @@
-<div class="card m-2" style="max-width: 14rem;min-width: 13rem;">
+<div class="card m-2 user-card" style="max-width: 14rem;min-width: 13rem;">
     <?php 
         $profilepicpath = ASSETS . ($row->gender == 'female' ? '/user_female.jpg' : '/user_male.jpg');
     ?>

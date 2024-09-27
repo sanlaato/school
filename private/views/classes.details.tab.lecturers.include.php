@@ -10,5 +10,10 @@
     <a href="<?=ROOT?>/classes/<?=$row->class_id?>?tab=lecturers-add">
         <button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add Lecturer</button>
     </a>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add Lecturer Modal
+    </button>
 </nav>
+
+<?php include($this->get_include_path('classes.details.tab.lecturers.add.modal')) ?>
 
