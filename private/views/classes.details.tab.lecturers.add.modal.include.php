@@ -7,18 +7,18 @@
         </div>
         <div class="modal-body">
             
-            <form method="post" class="">
-                <div class="form-group row">
-                    <div class="form-group col-md-11">
-                        <input value="<?=get_var('name')?>" class="form-control" type="text" name="name" placeholder="Lecturer Name" />
-                    </div>
-                    <div class="form-group col-md-1">
-                        <button class="btn btn-primary float-end" type="submit" name="search">Search</button>
-                    </div>
-                </div>    
-            </form>
 
-            <form method="post"  class="mt-4">
+            <div class="form-group row">
+                <div class="form-group col-md-11">
+                    <input id="searchInput" value="<?=get_var('name')?>" class="form-control" type="text" name="name" placeholder="Lecturer Name" />
+                </div>
+                <div class="form-group col-md-1">
+                    <button class="btn btn-primary float-end" type="button" id="searchButton">Search</button>
+                </div>
+            </div>    
+
+
+            <div  id="searchResultContainer" class="mt-4">
                 <?php if($results): ?>    
                     <div class="card-group justify-content-center">
                         <?php foreach ($results as $row): ?>
@@ -28,7 +28,7 @@
                 <?php else: ?>
                     <h4>No lecturer were found at this time</h4>    
                 <?php endif; ?>
-            </form>
+            </div>
 
         </div>
         <div class="modal-footer">

@@ -12,20 +12,29 @@ class App
     function __construct()
     {
         $URL = $this->getURL();
-        if(file_exists("../private/controllers/".$URL[0].".php")) {
-            $this->controller = ucfirst($URL[0]);
+
+        $basepath = '../private/controllers/';
+        $offset = 0;
+        if(strtolower($URL[0]) == "api") {
+            $basepath = '../private/api/';
+            $offset = 1;
             unset($URL[0]);
         }
+
+        if(file_exists($basepath . $URL[0+$offset] . ".php")) {
+            $this->controller = ucfirst($URL[0+$offset]);
+            unset($URL[0+$offset]);
+        }
         
-        require "../private/controllers/".$this->controller.".php";
+        require $basepath . $this->controller . ".php";
         $this->controller = new $this->controller();
 
-        if(isset($URL[1]))
+        if(isset($URL[1+$offset]))
         {
-            if(method_exists($this->controller, $URL[1]))
+            if(method_exists($this->controller, $URL[1+$offset]))
             {
-                $this->method = ucfirst($URL[1]);
-                unset($URL[1]);
+                $this->method = ucfirst($URL[1+$offset]);
+                unset($URL[1+$offset]);
             }
         }
 
