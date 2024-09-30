@@ -14,8 +14,9 @@ class Users extends Controller
 
         $user = new User();
         $search_input = '%' . $decode['search_input'] . '%';
-        $results = $user->query("SELECT * FROM users WHERE (CONCAT(firstname, ' ', lastname) LIKE :name)", [
-            'name'=>$search_input
+        $results = $user->query("SELECT * FROM users WHERE (CONCAT(firstname, ' ', lastname) LIKE :name) && school_id = :school_id", [
+            'name'=>$search_input,
+            'school_id'=>Auth::getSchool_id()
         ]);
 
         echo json_encode($results);

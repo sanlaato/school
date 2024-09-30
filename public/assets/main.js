@@ -1,23 +1,7 @@
-/*
-var userCards = document.getElementsByClassName("user-card");
-if(userCards.length > 0)
-{
-    var exampleModal = document.getElementById("exampleModal")
-    if(exampleModal != null)
-    {
-        var myModal = new bootstrap.Modal(exampleModal, {});
-        document.onreadystatechange = function () {
-            myModal.show();
-        };
-    }
-}
-*/
-
 let searchButton = document.getElementById("searchButton");
+let classId = document.getElementById("classId").value;
 
 searchButton.addEventListener("click", async () => {
-    console.log('searchButton clicked');
-
     try {
 
         let searchResultContainer = document.getElementById("searchResultContainer");
@@ -33,7 +17,6 @@ searchButton.addEventListener("click", async () => {
         });
 
         const output = await res.json();
-        console.log(output);
         /*
         
 
@@ -48,13 +31,31 @@ searchButton.addEventListener("click", async () => {
                     <h5 class="card-title">${output[i].firstname} ${output[i].lastname}</h5>
                     <p class="card-text">${output[i].user_rank}</p>
                     <a href="http://school.test/public/profile/${output[i].user_id}" class="btn btn-primary">Profile</a>
-                    <button type="submit" name="selected" class="btn btn-danger float-end">Select</button>
+                    <button value="${output[i].user_id}" type="submit" name="selected" class="select-button btn btn-danger float-end">Select</button>
                 </div>
             </div>`;
         }
         html += "</div>";
-        console.log(html);
         searchResultContainer.innerHTML = html;
+
+        var selectButtons = document.getElementsByClassName("select-button");
+        for(let i = 0; i < selectButtons.length; i++)
+        {
+            selectButtons[i].addEventListener('click', async () => {
+                const res = await fetch("http://school.test/public/api/classes/add_lecturer", {
+                    method: "POST",
+                    body: JSON.stringify({"class_id": classId, "user_id": selectButtons[i].value}),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                console.log(res);
+                const output = await res.json();
+                console.log(output);
+
+            });
+        }
         
     } catch (error) {
         console.log("error" + error);

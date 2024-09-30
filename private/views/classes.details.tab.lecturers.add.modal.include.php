@@ -18,16 +18,8 @@
             </div>    
 
 
-            <div  id="searchResultContainer" class="mt-4">
-                <?php if($results): ?>    
-                    <div class="card-group justify-content-center">
-                        <?php foreach ($results as $row): ?>
-                            <?php include ($this->get_include_path('user.card')) ?>
-                        <?php endforeach;?>
-                    <div>
-                <?php else: ?>
-                    <h4>No lecturer were found at this time</h4>    
-                <?php endif; ?>
+            <div  id="searchResultContainer" class="mt-4" style="min-height: 200px;">
+
             </div>
 
         </div>

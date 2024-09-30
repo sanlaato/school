@@ -1,6 +1,8 @@
 <?php $this->view('includes/header') ?>
 <?php $this->view('includes/nav') ?>
 
+        <input id="classId" type="hidden" value="<?= $row->class_id ?>">
+
         <div class="container-fluid p-4 shadow mx-auto" style="max-width:1000px;">
             <?php $this->view('includes/crumbs') ?>
 
