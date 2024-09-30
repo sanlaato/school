@@ -41,9 +41,6 @@ class Model extends Database
 
         $query = "insert into $this->table ($columns) values (:$values)";
 
-        
-        // SUCCESS QUERY return an empty array
-        // FAILED QUERY return boolean false 
         $check = $this->query($query, $data);
         if(is_array($check))
         {
