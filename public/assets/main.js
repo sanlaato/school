@@ -1,7 +1,12 @@
 let searchButton = document.getElementById("searchButton");
 let classId = document.getElementById("classId").value;
+var exampleModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+    keyboard: false
+});
 
-window.onload = async (event) => {
+
+async function listAllLecturers()
+{
     try {
         let lecturersContainer = document.getElementById("lecturersContainer");
         let html = "<div class='card-group justify-content-center'>";
@@ -37,6 +42,10 @@ window.onload = async (event) => {
     } catch (error) {
         console.log("error" + error);
     }
+}
+
+window.onload = async (event) => {
+    listAllLecturers();
 };
 
 searchButton.addEventListener("click", async () => {
@@ -79,6 +88,7 @@ searchButton.addEventListener("click", async () => {
         var selectButtons = document.getElementsByClassName("select-button");
         for(let i = 0; i < selectButtons.length; i++)
         {
+            
             selectButtons[i].addEventListener('click', async () => {
                 const res = await fetch("http://school.test/public/api/classes/add_lecturer", {
                     method: "POST",
@@ -89,8 +99,10 @@ searchButton.addEventListener("click", async () => {
                 });
 
                 const output = await res.json();
-                console.log(output);
+                
+                exampleModal.hide();
 
+                listAllLecturers();
             });
         }
         
