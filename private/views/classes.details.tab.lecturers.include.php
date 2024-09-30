@@ -15,5 +15,9 @@
     </button>
 </nav>
 
+<div  id="lecturersContainer" class="mt-4" style="min-height: 400px;">
+
+</div>
+
 <?php include($this->get_include_path('classes.details.tab.lecturers.add.modal')) ?>
 

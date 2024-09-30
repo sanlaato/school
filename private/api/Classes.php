@@ -14,6 +14,42 @@ class Classes extends Controller
         echo json_encode($data);
     }
 
+    function list_all_lecturers()
+    {
+        if(!Auth::logged_in())
+        {
+            $this->redirect('login');
+        }
+
+        $input = file_get_contents("php://input");
+        $decode = json_decode($input, true);
+
+        $class_lecturer = new ClassLecturer();
+        $results = $class_lecturer->query("SELECT * FROM classes_lecturers WHERE class_id = :class_id", ['class_id'=>$decode['class_id']],  ['get_user']);
+
+        echo json_encode($results);
+    }
+
+    function search_lecturers()
+    {
+        if(!Auth::logged_in())
+        {
+            $this->redirect('login');
+        }
+
+        $input = file_get_contents("php://input");
+        $decode = json_decode($input, true);
+
+        $user = new User();
+        $search_input = '%' . $decode['search_input'] . '%';
+        $results = $user->query("SELECT * FROM users WHERE (CONCAT(firstname, ' ', lastname) LIKE :name) && school_id = :school_id", [
+            'name'=>$search_input,
+            'school_id'=>Auth::getSchool_id()
+        ]);
+
+        echo json_encode($results);
+    }
+
     function add_lecturer()
     {
         if(!Auth::logged_in())
