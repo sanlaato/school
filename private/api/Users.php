@@ -19,6 +19,22 @@ class Users extends Controller
             'school_id'=>Auth::getSchool_id()
         ]);
 
+        $classes_lecturer = new ClassLecturer();
+        foreach($results as key $result)
+        {
+            $added = $classes_lecturer->query("SELECT * FROM classes_lecturers WHERE class_id = :class_id && user_id = :user_id", [
+                "class_id"=>$decode['class_id'],
+                "user_id"=>$result->user_id
+            ])
+
+            if($added) {
+                $result['added'] = true;
+            }
+            else {
+                $result['added'] = false;
+            }
+        }
+
         echo json_encode($results);
     }
 }

@@ -22,8 +22,6 @@ async function listAllLecturers()
 
         const output = await res.json();
 
-        console.log(output);
-
         for(var i in output)
         {
             html +=`
@@ -33,7 +31,7 @@ async function listAllLecturers()
                     <h5 class="card-title">${output[i].user.firstname} ${output[i].user.lastname}</h5>
                     <p class="card-text">${output[i].user.user_rank}</p>
                     <a href="http://school.test/public/profile/${output[i].user.user_id}" class="btn btn-primary">Profile</a>
-                    <button value="${output[i].user.user_id}" type="submit" name="selected" class="select-button btn btn-danger float-end">Select</button>
+
                 </div>
             </div>`;
         }
@@ -57,18 +55,14 @@ searchButton.addEventListener("click", async () => {
 
         const res = await fetch("http://school.test/public/api/classes/search_lecturers", {
             method: "POST",
-            body: JSON.stringify({"search_input": searchInput}),
+            body: JSON.stringify({"search_input": searchInput, "class_id": classId}),
             headers: {
                 "Content-Type": "application/json"
             }
         });
 
         const output = await res.json();
-        /*
-        
 
-        const output = await res.json();
-        */
         for(var i in output)
         {
             html +=`
@@ -77,22 +71,26 @@ searchButton.addEventListener("click", async () => {
                 <div class="card-body">
                     <h5 class="card-title">${output[i].firstname} ${output[i].lastname}</h5>
                     <p class="card-text">${output[i].user_rank}</p>
-                    <a href="http://school.test/public/profile/${output[i].user_id}" class="btn btn-primary">Profile</a>
-                    <button value="${output[i].user_id}" type="submit" name="selected" class="select-button btn btn-danger float-end">Select</button>
-                </div>
-            </div>`;
+                    <a href="http://school.test/public/profile/${output[i].user_id}" class="btn btn-primary">Profile</a>`;
+
+            if(output[i].added) {
+                html += `<button value="${output[i].user_id}" type="submit" name="selected" disabled class="select-button btn btn-secondary float-end">Added</button>`;
+            } else {
+                html += `<button value="${output[i].user_id}" type="submit" name="selected" class="select-button btn btn-danger float-end">Select</button>`;
+            }
+
+            html += `</div></div>`;
         }
         html += "</div>";
         searchResultContainer.innerHTML = html;
 
         var selectButtons = document.getElementsByClassName("select-button");
-        for(let i = 0; i < selectButtons.length; i++)
-        {
-            
-            selectButtons[i].addEventListener('click', async () => {
+
+        [...selectButtons].forEach(function(button, index){
+            button.addEventListener('click', async () => {
                 const res = await fetch("http://school.test/public/api/classes/add_lecturer", {
                     method: "POST",
-                    body: JSON.stringify({"class_id": classId, "user_id": selectButtons[i].value}),
+                    body: JSON.stringify({"class_id": classId, "user_id": button.value}),
                     headers: {
                         "Content-Type": "application/json"
                     }
@@ -102,9 +100,11 @@ searchButton.addEventListener("click", async () => {
                 
                 exampleModal.hide();
 
+                searchResultContainer.innerHTML = "";
+
                 listAllLecturers();
             });
-        }
+        });
         
     } catch (error) {
         console.log("error" + error);
