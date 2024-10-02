@@ -98,7 +98,12 @@ searchButton.addEventListener("click", async () => {
 
                 const output = await res.json();
                 
-                exampleModal.hide();
+                //exampleModal.hide();
+
+                button.classList.add('btn-secondary');
+                button.classList.remove('btn-danger');
+                button.disabled = true;
+                button.textContent ="Added";
 
                 searchResultContainer.innerHTML = "";
 
